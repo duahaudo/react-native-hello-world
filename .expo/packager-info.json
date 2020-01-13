@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://ir-g9p.duahaudo.helloworld.exp.direct",
-  "packagerNgrokUrl": "https://packager.ir-g9p.duahaudo.helloworld.exp.direct",
-  "ngrokPid": 3215
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

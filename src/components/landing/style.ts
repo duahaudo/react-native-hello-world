@@ -3,12 +3,11 @@ import {StyleSheet} from "react-native"
 const style = StyleSheet.create({
   landing: {
     flex: 1,
-    color: "#fff",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 10
   },
   text: {
-    color: "#ffffff",
     marginBottom: 10
   }
 })

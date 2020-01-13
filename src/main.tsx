@@ -1,6 +1,8 @@
 import React from 'react';
 import {Provider} from "react-redux";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
+import Constants from 'expo-constants';
+
 import store from "./duck/store"
 
 import Header from "./components/header";
@@ -9,7 +11,7 @@ import Body from "./components/routers";
 export default function Main() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Header />
         </View>
@@ -17,7 +19,7 @@ export default function Main() {
         <View style={styles.body}>
           <Body />
         </View>
-      </View>
+      </SafeAreaView>
     </Provider>
   );
 }
@@ -27,12 +29,12 @@ const styles = StyleSheet.create({
     height: 70
   },
   body: {
-    flex: 1,
-    backgroundColor: "#000"
+    flex: 1
   },
   container: {
     flex: 1,
-    backgroundColor: '#eee',
-    alignItems: 'stretch'
+    // backgroundColor: 'skyblue',
+    alignItems: 'stretch',
+    paddingTop: Constants.statusBarHeight
   },
 });

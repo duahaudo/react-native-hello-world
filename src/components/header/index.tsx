@@ -9,7 +9,7 @@ export default () => {
 
   return (
     <View style={style.header}>
-      <Text style={style.text}> O'Clock </Text>
+      <Text style={style.text}> Stiger Notes </Text>
     </View>
   )
 }
