@@ -10,10 +10,15 @@ export const action = {
   ACTION_SET_VIEW: 'SET_VIEW',
   ACTION_SET_SELECTED_ITEM: 'SET_SELECTED_ITEM',
   ACTION_SHOW_LOADDING: 'ACTION_SHOW_LOADDING',
-  ACTION_NEW_NOTE: 'ACTION_NEW_NOTE'
+  ACTION_NEW_NOTE: 'ACTION_NEW_NOTE',
+  ACTION_OPEN_NOTE_MODAL: 'ACTION_OPEN_NOTE_MODAL',
+  ACTION_CLOSE_NOTE_MODAL: 'ACTION_CLOSE_NOTE_MODAL'
 }
 
 export const setView = createSimpleAction(action.ACTION_SET_VIEW);
+export const initData = createSimpleAction(action.ACTION_INIT_DATA);
 export const setSelectedItem = createSimpleAction(action.ACTION_SET_SELECTED_ITEM);
 export const showLoading = createSimpleAction(action.ACTION_SHOW_LOADDING);
 export const newNote = createSimpleAction(action.ACTION_NEW_NOTE);
+export const openNoteModal = createSimpleAction(action.ACTION_OPEN_NOTE_MODAL);
+export const closeNoteModal = createSimpleAction(action.ACTION_CLOSE_NOTE_MODAL);

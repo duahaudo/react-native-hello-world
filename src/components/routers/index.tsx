@@ -3,7 +3,6 @@ import {View} from 'react-native'
 import {action} from "../../duck/action"
 import {useSelector} from "react-redux"
 import { IStoreState } from '../../duck/type'
-import Constants from 'expo-constants';
 
 import Landing from "../landing"
 import Notes from "../note"

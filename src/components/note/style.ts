@@ -3,7 +3,9 @@ import Constants from 'expo-constants';
 
 const style = StyleSheet.create({
   container: {
-    padding: 10
+    flex: 1,
+    padding: 10,
+    // backgroundColor: "pink"
   },
   view: {
     alignItems: "center",
@@ -17,17 +19,25 @@ const style = StyleSheet.create({
     backgroundColor: "red"
   },
   modal: {
-    marginTop: Constants.statusBarHeight
+    // marginTop: Constants.statusBarHeight
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10
   },
-  input: { 
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 1 
+  list: {
+    // backgroundColor: "green"
+  },
+  saveBtn: {
+  },
+  inputs: {
+  },
+  listItem: {
+    height: 40,
+    borderBottomColor: "#aaa",
+    borderBottomWidth: 1,
+    justifyContent: "center"
   }
 })
 
