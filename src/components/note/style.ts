@@ -30,6 +30,7 @@ const style = StyleSheet.create({
     // backgroundColor: "green"
   },
   saveBtn: {
+    marginTop: 20
   },
   inputs: {
   },
@@ -37,7 +38,9 @@ const style = StyleSheet.create({
     height: 40,
     borderBottomColor: "#aaa",
     borderBottomWidth: 1,
-    justifyContent: "center"
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 })
 

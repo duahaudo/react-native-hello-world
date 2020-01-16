@@ -13,7 +13,8 @@ const style = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    right: 10
+    right: 10,
+    fontSize: 20
   }
 })
 

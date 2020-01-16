@@ -6,6 +6,7 @@ import style from "./style"
 import { IStoreState, INote } from '../../duck/type';
 import {StiTxt} from "../controls/input"
 import {StiView} from "../controls/other"
+import moment from "moment"
 
 import NoteCrud from "./crud"
 
@@ -53,6 +54,7 @@ export default () => {
           onPress={() => dispatch(openNoteModal(noteItem))}>
             <View style={style.listItem}>
               {noteItem && <StiTxt>{noteItem.title}</StiTxt>}
+              {noteItem && <StiTxt style={{fontSize: 12, color: "grey"}}>{moment(noteItem.timestamp).format("DD/MM/YYYY HH:mm")}</StiTxt>}
             </View>
         </TouchableOpacity>))}
       </ScrollView>}

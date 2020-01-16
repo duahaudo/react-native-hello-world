@@ -3,7 +3,8 @@ import {TouchableOpacity, Text, StyleSheet} from "react-native"
 
 export interface IBtn {
   onPress: () => void,
-  title: string
+  title: string,
+  style?: any
 }
 
 export const StiBtn = (props: IBtn) => {
@@ -15,9 +16,10 @@ export const StiBtn = (props: IBtn) => {
 }
 
 export const LnkBtn = (props: IBtn) => {
+  const styles = {...style.lnk, ...props.style}
   return (
-    <TouchableOpacity style={style.lnk} onPress={() => props.onPress()}>
-      <Text> { props.title } </Text>
+    <TouchableOpacity style={styles} onPress={() => props.onPress()}>
+      <Text style={props.style}> { props.title } </Text>
     </TouchableOpacity>
   )
 }

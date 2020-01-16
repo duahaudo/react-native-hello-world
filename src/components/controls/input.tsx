@@ -3,11 +3,12 @@ import {View, TextInput, StyleSheet, Text} from "react-native"
 
 export const StiTxt = (props) => <Text style={{...props.style, ...style.text}}>{props.children}</Text>
 
-export const StiInput = ({title, value, onChangeText}) => (
+export const StiInput = ({title, value, onChangeText, ...options}) => (
   <View style={style.inputWrapper}>
     <StiTxt>{title}</StiTxt>
-    <TextInput
-      style={style.input}
+    <TextInput 
+      {...options}
+      style={{...style.input, ...options.style}}
       onChangeText={text => onChangeText(text)}
       value={value}/>
   </View>
@@ -15,7 +16,7 @@ export const StiInput = ({title, value, onChangeText}) => (
 
 const style = StyleSheet.create({
   input: { 
-    height: 40, 
+    minHeight: 40, 
     borderColor: 'gray', 
     borderWidth: 1,
     color: "#000",

@@ -24,11 +24,12 @@ export default ({ currentNote, show, onClose }) => {
       <View style={style.modal}>
         <View style={style.inputs}>
           <StiInput title="Title" value={note.title} onChangeText={(text: string) => setNote({...note, title: text})}/>
-          <StiInput title="Content" value={note.content} onChangeText={(text: string) => setNote({...note, content: text})}/>
+          <StiInput title="Content" value={note.content} style={{height: 250}}
+                    onChangeText={(text: string) => setNote({...note, content: text})} multiline={true} numberOfLines={4}/>
         </View>
         <View style={style.saveBtn}>
-            <StiBtn onPress={() => dispatch(closeNoteModal(note))} title="Save" />
-          </View>
+          <StiBtn onPress={() => dispatch(closeNoteModal(note))} title="Save" />
+        </View>
       </View>
     </StiModal>
   </View>

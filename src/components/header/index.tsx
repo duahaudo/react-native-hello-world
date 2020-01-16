@@ -17,7 +17,7 @@ export default () => {
         <Text style={style.text}> Stiger Notes </Text>
       </View>
       <View style={style.button}>
-        <LnkBtn title={"+"} onPress={() => dispatch(openNoteModal(null))} />
+        <LnkBtn title={"+"} style={{fontSize: 40}} onPress={() => dispatch(openNoteModal(null))} />
       </View>
     </View>
   )
