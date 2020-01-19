@@ -7,6 +7,7 @@ import store from "./duck/store"
 
 import Header from "./components/header";
 import Body from "./components/routers";
+import Footer from "./components/footer";
 
 export default function Main() {
   return (
@@ -18,6 +19,10 @@ export default function Main() {
 
         <View style={styles.body}>
           <Body />
+        </View>
+
+        <View style={styles.footer}>
+          <Footer />
         </View>
       </SafeAreaView>
     </Provider>
@@ -37,4 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     paddingTop: Constants.statusBarHeight
   },
+  footer: {
+    height: 70
+  }
 });

@@ -7,18 +7,18 @@ import {LnkBtn} from "../controls/button"
 import {openNoteModal} from "../../duck/action"
 
 export default () => {
-  const view: string = useSelector(({reducer}: IStoreState) => reducer.view)
+  const module: string = useSelector(({reducer}: IStoreState) => reducer.module)
 
   const dispatch = useDispatch();
 
   return (
     <View style={style.header}>
       <View>
-        <Text style={style.text}> Stiger Notes </Text>
+        <Text style={style.text}> {module} </Text>
       </View>
-      <View style={style.button}>
+      {/* <View style={style.button}>
         <LnkBtn title={"+"} style={{fontSize: 40}} onPress={() => dispatch(openNoteModal(null))} />
-      </View>
+      </View> */}
     </View>
   )
 }

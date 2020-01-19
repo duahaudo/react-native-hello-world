@@ -19,7 +19,8 @@ const style = StyleSheet.create({
     backgroundColor: "red"
   },
   modal: {
-    // marginTop: Constants.statusBarHeight
+    padding: 20,
+    paddingTop: 0
   },
   button: {
     alignItems: 'center',
@@ -41,6 +42,23 @@ const style = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  title: {
+    padding: 20,
+    alignItems: "center",
+    backgroundColor: "skyblue",
+    marginBottom: 20,
+    marginHorizontal: -20
+  },
+  plusBtn: {
+    backgroundColor: "royalblue",
+    padding: 10,
+    width: 60,
+    height: 60,
+    alignSelf: "center",
+    borderRadius: 32,
+    justifyContent: 'center',
+    alignItems: "center"
   }
 })
 

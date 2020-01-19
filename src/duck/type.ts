@@ -4,7 +4,8 @@ export interface IState {
   notes: INote[],
   crudModalOpen: boolean,
   selectedNote: INote,
-  loaded: boolean
+  loaded: boolean,
+  module: string
 }
 
 export interface IStoreState {

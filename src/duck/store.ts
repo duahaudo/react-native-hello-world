@@ -11,7 +11,7 @@ const logger = createLogger({
   diff: true
 });
 
-let middlewares = [promise, thunk, logger];
+let middlewares = [promise, thunk];
 
 const middleware = applyMiddleware(...middlewares);
 

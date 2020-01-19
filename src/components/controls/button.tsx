@@ -27,7 +27,7 @@ export const LnkBtn = (props: IBtn) => {
 const style = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: 'lightgreen',
     padding: 10
   },
   lnk:{

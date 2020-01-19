@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {View, Modal, Alert} from "react-native"
 import {INote} from "../../duck/type"
-import {StiInput} from "../controls/input"
+import {StiInput, StiTxt} from "../controls/input"
 import {StiBtn} from "../controls/button"
 import {StiModal} from "../controls/other"
 import style from "./style"
@@ -22,6 +22,9 @@ export default ({ currentNote, show, onClose }) => {
   return <View>
     <StiModal show={show}>
       <View style={style.modal}>
+        <View style={style.title}>
+          <StiTxt>Create Update</StiTxt>
+        </View>
         <View style={style.inputs}>
           <StiInput title="Title" value={note.title} onChangeText={(text: string) => setNote({...note, title: text})}/>
           <StiInput title="Content" value={note.content} style={{height: 250}}

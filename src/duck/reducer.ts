@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import {IState, INote} from "./type"
-import {action as constant} from "./action"
+import {action as constant, moduleName} from "./action"
 import {findIndex, uniqueId} from "lodash"
 import {AsyncStorage} from "react-native"
 
@@ -12,6 +12,7 @@ interface IAction {
 const reducer = (state: IState = {
   timestamps: Date.now(),
   view: constant.VIEW_NOTE,
+  module: moduleName.HOME,
   notes: [],
   crudModalOpen: false,
   selectedNote: null,
@@ -30,6 +31,12 @@ const reducer = (state: IState = {
     case constant.ACTION_SET_VIEW: {
       return {...state,
         view: action.params
+      }
+    }
+    case constant.ACTION_SET_MODULE: {
+      console.log(action.params)
+      return {...state,
+        module: action.params
       }
     }
     case constant.ACTION_OPEN_NOTE_MODAL: {
@@ -58,6 +65,15 @@ const reducer = (state: IState = {
       return {...state,
         crudModalOpen: false,
         notes
+      }
+    }
+    case constant.ACTION_DELETE_NOTE: {
+      const noteId: string = action.params;
+      let idx: number = findIndex(state.notes, (item: INote) => item.id === noteId);
+      state.notes.splice(idx, 1)
+      AsyncStorage.setItem("Sti_note", JSON.stringify(state.notes))
+      return {...state,
+        timestamps: Date.now()
       }
     }
   }

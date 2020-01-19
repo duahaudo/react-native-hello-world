@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { openNoteModal, closeNoteModal, initData } from "../../duck/action"
+import { openNoteModal, closeNoteModal, initData, deleteNote } from "../../duck/action"
 import style from "./style"
 import { IStoreState, INote } from '../../duck/type';
 import {StiTxt} from "../controls/input"
@@ -9,6 +9,7 @@ import {StiView} from "../controls/other"
 import moment from "moment"
 
 import NoteCrud from "./crud"
+import { StiIconFontAwesome5 } from '../../components/controls/icon';
 
 interface IProps {
   notes: INote[],
@@ -53,11 +54,18 @@ export default () => {
           key={noteItem.id} 
           onPress={() => dispatch(openNoteModal(noteItem))}>
             <View style={style.listItem}>
-              {noteItem && <StiTxt>{noteItem.title}</StiTxt>}
+              <View style={style.listItem}>
+                <StiIconFontAwesome5 name="ban" color="red" onPress={() => dispatch(deleteNote(noteItem.id))} />
+                {noteItem && <StiTxt>{noteItem.title}</StiTxt>}
+              </View>
               {noteItem && <StiTxt style={{fontSize: 12, color: "grey"}}>{moment(noteItem.timestamp).format("DD/MM/YYYY HH:mm")}</StiTxt>}
             </View>
         </TouchableOpacity>))}
       </ScrollView>}
+
+      <View style={style.plusBtn}>
+        <StiIconFontAwesome5 name="plus" size={30} color="white" onPress={() => dispatch(openNoteModal(null))} />
+      </View>
     </View>
   )
 }

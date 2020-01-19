@@ -1,6 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
-import {action} from "../../duck/action"
+import {moduleName} from "../../duck/action"
 import {useSelector} from "react-redux"
 import { IStoreState } from '../../duck/type'
 
@@ -8,12 +8,12 @@ import Landing from "../landing"
 import Notes from "../note"
 
 export default () => {
-  const view: string = useSelector(({reducer}: IStoreState) => reducer.view)
+  const module: string = useSelector(({reducer}: IStoreState) => reducer.module)
   
   return (
     <View style={{flex: 1}}>
-      {view === action.VIEW_HOME && <Landing />}
-      {view === action.VIEW_NOTE && <Notes />}
+      {module === moduleName.HOME && <Landing />}
+      {module === moduleName.NOTE && <Notes />}
     </View>
   )
 }

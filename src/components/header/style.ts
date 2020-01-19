@@ -3,12 +3,12 @@ import {StyleSheet} from "react-native"
 const style = StyleSheet.create({
   header: {
     flex: 1,
-    backgroundColor: "skyblue",
+    backgroundColor: "royalblue",
     justifyContent: "center",
     alignItems: "center"
   },
   text: {
-    color: "#000",
+    color: "#fff",
     fontSize: 26
   },
   button: {
