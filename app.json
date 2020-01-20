@@ -2,7 +2,7 @@
   "name": "helloWorld",
   "displayName": "Hello World",
   "expo": {
-    "name": "helloWorld_firstStep",
+    "name": "Stiger App",
     "slug": "expo-template-bare",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
