@@ -32,8 +32,8 @@ export default () => {
   useEffect(() => {
     if (!props.loaded) {
       AsyncStorage.getItem("Sti_note").then((notesStr: string) => {
-        console.log(notesStr)
-        dispatch(initData(JSON.parse(notesStr)))
+        // console.log(notesStr)
+        dispatch(initData({notes: JSON.parse(notesStr)}))
       })
     }
   }, [props.loaded])
@@ -54,9 +54,9 @@ export default () => {
           key={noteItem.id} 
           onPress={() => dispatch(openNoteModal(noteItem))}>
             <View style={style.listItem}>
-              <View style={style.listItem}>
+              <View style={style.listItem2}>
                 <StiIconFontAwesome5 name="ban" color="red" onPress={() => dispatch(deleteNote(noteItem.id))} />
-                {noteItem && <StiTxt>{noteItem.title}</StiTxt>}
+                {noteItem && <StiTxt style={style.title}>{noteItem.title}</StiTxt>}
               </View>
               {noteItem && <StiTxt style={{fontSize: 12, color: "grey"}}>{moment(noteItem.timestamp).format("DD/MM/YYYY HH:mm")}</StiTxt>}
             </View>
@@ -64,7 +64,7 @@ export default () => {
       </ScrollView>}
 
       <View style={style.plusBtn}>
-        <StiIconFontAwesome5 name="plus" size={30} color="white" onPress={() => dispatch(openNoteModal(null))} />
+        <StiIconFontAwesome5 name="plus" size={25} color="white" onPress={() => dispatch(openNoteModal(null))} />
       </View>
     </View>
   )

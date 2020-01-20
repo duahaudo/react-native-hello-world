@@ -5,7 +5,7 @@ import { IStoreState } from "../../duck/type"
 import style from "./style"
 import { setModule, moduleName } from "../../duck/action"
 
-import { StiIconFontAwesome5, StiIconEntypo } from '../../components/controls/icon';
+import { StiIconFontAwesome5, StiIconEntypo } from '../controls/icon';
 
 
 export default () => {
@@ -21,6 +21,10 @@ export default () => {
       <View>
         <StiIconFontAwesome5 name="sticky-note" size={30} color={module === moduleName.NOTE ? "royalblue" : "black"}
           onPress={() => dispatch(setModule(moduleName.NOTE))} />
+      </View>
+      <View>
+        <StiIconFontAwesome5 name="camera-retro" size={30} color={module === moduleName.CAMERA ? "royalblue" : "black"}
+          onPress={() => dispatch(setModule(moduleName.CAMERA))} />
       </View>
       <View>
         <StiIconEntypo name="chat" size={30} color={module === moduleName.CHAT ? "royalblue" : "black"}

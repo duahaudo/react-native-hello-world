@@ -43,12 +43,16 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  title: {
-    padding: 20,
+  listItem2: {
+    height: 40,
     alignItems: "center",
-    backgroundColor: "skyblue",
-    marginBottom: 20,
-    marginHorizontal: -20
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  title: {
+    paddingLeft: 20,
+    justifyContent: 'center',
+    alignItems: "center"
   },
   plusBtn: {
     backgroundColor: "royalblue",

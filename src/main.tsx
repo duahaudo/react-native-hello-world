@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // backgroundColor: 'skyblue',
+    backgroundColor: 'lightblue',
     alignItems: 'stretch',
-    paddingTop: Constants.statusBarHeight
+    // paddingTop: 200 //Constants.statusBarHeight
   },
   footer: {
     height: 70

@@ -4,6 +4,7 @@ export const action = {
   VIEW_HOME: 'VIEW_HOME',
   VIEW_DETAIL: 'VIEW_DETAIL',
   VIEW_NOTE: 'VIEW_NOTE',
+  VIEW_CAMERA: 'VIEW_CAMERA',
   VIEW_CRUD_NOTE: 'VIEW_CRUD_NOTE',
 
   ACTION_INIT_DATA: 'INIT_DATA',
@@ -14,6 +15,7 @@ export const action = {
   ACTION_DELETE_NOTE: 'ACTION_DELETE_NOTE',
   ACTION_OPEN_NOTE_MODAL: 'ACTION_OPEN_NOTE_MODAL',
   ACTION_CLOSE_NOTE_MODAL: 'ACTION_CLOSE_NOTE_MODAL',
+  ACTION_SAVE_PICTURE: 'ACTION_SAVE_PICTURE',
 
   ACTION_SET_MODULE: 'ACTION_SET_MODULE'
 }
@@ -21,6 +23,7 @@ export const action = {
 export const moduleName = {
   HOME: 'Home',
   NOTE: "Note",
+  CAMERA: "Pictures",
   CHAT: "Chat",
   USER: "Config"
 }
@@ -33,5 +36,6 @@ export const newNote = createSimpleAction(action.ACTION_NEW_NOTE);
 export const deleteNote = createSimpleAction(action.ACTION_DELETE_NOTE);
 export const openNoteModal = createSimpleAction(action.ACTION_OPEN_NOTE_MODAL);
 export const closeNoteModal = createSimpleAction(action.ACTION_CLOSE_NOTE_MODAL);
+export const savePicture = createSimpleAction(action.ACTION_SAVE_PICTURE);
 
 export const setModule = createSimpleAction(action.ACTION_SET_MODULE);

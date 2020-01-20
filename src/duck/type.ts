@@ -5,7 +5,13 @@ export interface IState {
   crudModalOpen: boolean,
   selectedNote: INote,
   loaded: boolean,
-  module: string
+  module: string,
+  pictures: IPicture[]
+}
+
+export interface IPicture {
+  id: string,
+  base64: string
 }
 
 export interface IStoreState {

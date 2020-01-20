@@ -1,4 +1,4 @@
-import {combineReducers} from "redux";
+import {combineReducers, Action} from "redux";
 import {IState, INote} from "./type"
 import {action as constant, moduleName} from "./action"
 import {findIndex, uniqueId} from "lodash"
@@ -14,18 +14,24 @@ const reducer = (state: IState = {
   view: constant.VIEW_NOTE,
   module: moduleName.HOME,
   notes: [],
+  pictures: [],
   crudModalOpen: false,
   selectedNote: null,
   loaded: false
 }, action: IAction): IState => {
   switch (action.type) {
     case constant.ACTION_INIT_DATA: {
+      // AsyncStorage.setItem("Sti_pictures", JSON.stringify([]))
+      const {notes, pictures} = action.params
+      console.log("Note", notes ? notes.length : 0)
+      console.log("Picture", pictures ? pictures.length : 0)
       return {
         ...state,
         crudModalOpen: false,
         selectedNote: null,
         loaded: true,
-        notes: [...action.params]
+        notes: notes ? [...notes] : [],
+        pictures: pictures ? [...pictures] : []
       }
     }
     case constant.ACTION_SET_VIEW: {
@@ -34,9 +40,10 @@ const reducer = (state: IState = {
       }
     }
     case constant.ACTION_SET_MODULE: {
-      console.log(action.params)
+      // console.log(action.params)
       return {...state,
-        module: action.params
+        module: action.params,
+        loaded: false
       }
     }
     case constant.ACTION_OPEN_NOTE_MODAL: {
@@ -75,6 +82,17 @@ const reducer = (state: IState = {
       return {...state,
         timestamps: Date.now()
       }
+    }
+    case constant.ACTION_SAVE_PICTURE: {
+      const base64: string = action.params;
+      state.pictures.push({
+        id: uniqueId(`sti_pic_${Date.now()}`),
+        base64
+      })
+
+      AsyncStorage.setItem("Sti_pictures", JSON.stringify(state.pictures))
+
+      return {...state}
     }
   }
 
