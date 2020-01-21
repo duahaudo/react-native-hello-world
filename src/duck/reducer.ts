@@ -10,6 +10,7 @@ interface IAction {
 }
 
 const reducer = (state: IState = {
+
   timestamps: Date.now(),
   view: constant.VIEW_NOTE,
   module: moduleName.HOME,
@@ -17,7 +18,9 @@ const reducer = (state: IState = {
   pictures: [],
   crudModalOpen: false,
   selectedNote: null,
-  loaded: false
+  loaded: false,
+  showLoadingIndicator: false
+
 }, action: IAction): IState => {
   switch (action.type) {
     case constant.ACTION_INIT_DATA: {
@@ -37,6 +40,11 @@ const reducer = (state: IState = {
     case constant.ACTION_SET_VIEW: {
       return {...state,
         view: action.params
+      }
+    }
+    case constant.ACTION_SHOW_LOADING_INDICATOR: {
+      return {...state,
+        showLoadingIndicator: action.params
       }
     }
     case constant.ACTION_SET_MODULE: {

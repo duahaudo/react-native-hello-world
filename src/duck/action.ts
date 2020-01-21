@@ -10,12 +10,13 @@ export const action = {
   ACTION_INIT_DATA: 'INIT_DATA',
   ACTION_SET_VIEW: 'SET_VIEW',
   ACTION_SET_SELECTED_ITEM: 'SET_SELECTED_ITEM',
-  ACTION_SHOW_LOADDING: 'ACTION_SHOW_LOADDING',
   ACTION_NEW_NOTE: 'ACTION_NEW_NOTE',
   ACTION_DELETE_NOTE: 'ACTION_DELETE_NOTE',
   ACTION_OPEN_NOTE_MODAL: 'ACTION_OPEN_NOTE_MODAL',
   ACTION_CLOSE_NOTE_MODAL: 'ACTION_CLOSE_NOTE_MODAL',
   ACTION_SAVE_PICTURE: 'ACTION_SAVE_PICTURE',
+
+  ACTION_SHOW_LOADING_INDICATOR: 'ACTION_SHOW_LOADING_INDICATOR',
 
   ACTION_SET_MODULE: 'ACTION_SET_MODULE'
 }
@@ -31,7 +32,7 @@ export const moduleName = {
 export const setView = createSimpleAction(action.ACTION_SET_VIEW);
 export const initData = createSimpleAction(action.ACTION_INIT_DATA);
 export const setSelectedItem = createSimpleAction(action.ACTION_SET_SELECTED_ITEM);
-export const showLoading = createSimpleAction(action.ACTION_SHOW_LOADDING);
+export const showLoading = createSimpleAction(action.ACTION_SHOW_LOADING_INDICATOR);
 export const newNote = createSimpleAction(action.ACTION_NEW_NOTE);
 export const deleteNote = createSimpleAction(action.ACTION_DELETE_NOTE);
 export const openNoteModal = createSimpleAction(action.ACTION_OPEN_NOTE_MODAL);

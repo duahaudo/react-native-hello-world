@@ -1,18 +1,32 @@
 import React from 'react';
-import {Provider} from "react-redux";
-import { StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
+import { Provider, useSelector } from "react-redux";
+import { StyleSheet, View, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native';
 import Constants from 'expo-constants';
+import { IStoreState } from "./duck/type"
 
 import store from "./duck/store"
 
 import Header from "./components/header";
 import Body from "./components/routers";
 import Footer from "./components/footer";
+import style from './components/header/style';
 
-export default function Main() {
+const MainView = () => {
+  const showLoadingIndicator: boolean = useSelector(({ reducer }: IStoreState) => reducer.showLoadingIndicator)
+
+  let viewStyle = { ...styles.body }
+  if (showLoadingIndicator) {
+    viewStyle = { ...styles.body, ...styles.opacityHalf }
+  }
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      {showLoadingIndicator && <View style={styles.loadingIndicator}>
+        <ActivityIndicator size="large" color="#ffffff" />
+      </View>}
+
+      <View style={viewStyle}>
+        <StatusBar barStyle="light-content" />
+
         <View style={styles.header}>
           <Header />
         </View>
@@ -24,25 +38,47 @@ export default function Main() {
         <View style={styles.footer}>
           <Footer />
         </View>
-      </SafeAreaView>
-    </Provider>
-  );
+      </View>
+    </SafeAreaView>
+  )
 }
+
+export default () => (
+  <Provider store={store}>
+    <MainView />
+  </Provider>
+)
 
 const styles = StyleSheet.create({
   header: {
-    height: 70
+    height: 40
   },
   body: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'lightblue',
+  },
+  opacityHalf: {
+    opacity: 0.5
   },
   container: {
     flex: 1,
-    backgroundColor: 'lightblue',
-    alignItems: 'stretch',
+    backgroundColor: "royalblue"
+    // alignItems: 'stretch',
     // paddingTop: 200 //Constants.statusBarHeight
   },
   footer: {
-    height: 70
+    height: 50
+  },
+  loadingIndicator: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    alignSelf: "center",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#000",
+    opacity: 0.7
   }
 });

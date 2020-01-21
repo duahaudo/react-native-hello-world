@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { openNoteModal, closeNoteModal, initData, deleteNote } from "../../duck/action"
+import { openNoteModal, closeNoteModal, initData, deleteNote, showLoading } from "../../duck/action"
 import style from "./style"
 import { IStoreState, INote } from '../../duck/type';
 import {StiTxt} from "../controls/input"
@@ -31,9 +31,11 @@ export default () => {
 
   useEffect(() => {
     if (!props.loaded) {
+      dispatch(showLoading(true))
       AsyncStorage.getItem("Sti_note").then((notesStr: string) => {
         // console.log(notesStr)
         dispatch(initData({notes: JSON.parse(notesStr)}))
+        dispatch(showLoading(false))
       })
     }
   }, [props.loaded])

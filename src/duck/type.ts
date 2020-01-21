@@ -6,7 +6,8 @@ export interface IState {
   selectedNote: INote,
   loaded: boolean,
   module: string,
-  pictures: IPicture[]
+  pictures: IPicture[],
+  showLoadingIndicator: boolean
 }
 
 export interface IPicture {

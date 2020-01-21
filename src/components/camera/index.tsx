@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { View, Image, AsyncStorage } from "react-native"
+import { View, Image, AsyncStorage, ActivityIndicator } from "react-native"
 import { useSelector, useDispatch } from 'react-redux'
 import { IStoreState, IPicture } from "../../duck/type"
-import { savePicture, initData } from "../../duck/action"
+import { savePicture, initData, showLoading } from "../../duck/action"
 import style from "./style"
 
 import { StiIconFontAwesome5 } from '../controls/icon';
@@ -31,8 +31,10 @@ export default () => {
 
   useEffect(() => {
     if (!props.loaded) {
+      dispatch(showLoading(true))
       AsyncStorage.getItem("Sti_pictures").then((pictures: string) => {
         dispatch(initData({pictures: JSON.parse(pictures)}))
+        dispatch(showLoading(false))
       })
     }
   }, [props.loaded])

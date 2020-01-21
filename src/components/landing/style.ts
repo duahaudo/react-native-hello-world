@@ -5,7 +5,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   text: {
     marginBottom: 10
