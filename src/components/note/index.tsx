@@ -30,14 +30,7 @@ export default () => {
   })
 
   useEffect(() => {
-    if (!props.loaded) {
-      dispatch(showLoading(true))
-      AsyncStorage.getItem("Sti_note").then((notesStr: string) => {
-        // console.log(notesStr)
-        dispatch(initData({notes: JSON.parse(notesStr)}))
-        dispatch(showLoading(false))
-      })
-    }
+    dispatch(initData())
   }, [props.loaded])
 
   return (

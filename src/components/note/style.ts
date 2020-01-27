@@ -62,7 +62,9 @@ const style = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 32,
     justifyContent: 'center',
-    alignItems: "center"
+    alignItems: "center",
+    position: "absolute",
+    bottom: 10
   }
 })
 

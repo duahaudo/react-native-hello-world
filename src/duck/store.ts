@@ -11,7 +11,13 @@ const logger = createLogger({
   diff: true
 });
 
-let middlewares = [promise, thunk];
+const customMiddleWare = store => next => action => {
+  // console.log("Middleware triggered:", action);
+  next(action);
+}
+
+
+let middlewares = [promise, thunk, customMiddleWare];
 
 const middleware = applyMiddleware(...middlewares);
 

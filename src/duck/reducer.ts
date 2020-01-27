@@ -1,8 +1,8 @@
-import {combineReducers, Action} from "redux";
-import {IState, INote} from "./type"
-import {action as constant, moduleName} from "./action"
-import {findIndex, uniqueId} from "lodash"
-import {AsyncStorage} from "react-native"
+import { combineReducers, Action } from "redux";
+import { IState, INote, IPicture } from "./type"
+import { action as constant, moduleName } from "./action"
+import { findIndex, uniqueId } from "lodash"
+import { saveAsyncStore } from "./helper"
 
 interface IAction {
   type: string,
@@ -13,7 +13,7 @@ const reducer = (state: IState = {
 
   timestamps: Date.now(),
   view: constant.VIEW_NOTE,
-  module: moduleName.HOME,
+  module: moduleName.CAMERA,
   notes: [],
   pictures: [],
   crudModalOpen: false,
@@ -25,7 +25,7 @@ const reducer = (state: IState = {
   switch (action.type) {
     case constant.ACTION_INIT_DATA: {
       // AsyncStorage.setItem("Sti_pictures", JSON.stringify([]))
-      const {notes, pictures} = action.params
+      const { notes, pictures } = action.params
       console.log("Note", notes ? notes.length : 0)
       console.log("Picture", pictures ? pictures.length : 0)
       return {
@@ -38,24 +38,28 @@ const reducer = (state: IState = {
       }
     }
     case constant.ACTION_SET_VIEW: {
-      return {...state,
+      return {
+        ...state,
         view: action.params
       }
     }
     case constant.ACTION_SHOW_LOADING_INDICATOR: {
-      return {...state,
+      return {
+        ...state,
         showLoadingIndicator: action.params
       }
     }
     case constant.ACTION_SET_MODULE: {
       // console.log(action.params)
-      return {...state,
+      return {
+        ...state,
         module: action.params,
         loaded: false
       }
     }
     case constant.ACTION_OPEN_NOTE_MODAL: {
-      return {...state,
+      return {
+        ...state,
         crudModalOpen: true,
         selectedNote: action.params || {
           title: "",
@@ -67,7 +71,7 @@ const reducer = (state: IState = {
     }
     case constant.ACTION_CLOSE_NOTE_MODAL: {
       const newNote: INote = action.params;
-      let {notes} = state;
+      let { notes } = state;
       let idx: number = findIndex(notes, (item: INote) => item.id === newNote.id);
       if (idx > -1) {
         notes.splice(idx, 1, newNote)
@@ -75,9 +79,10 @@ const reducer = (state: IState = {
         notes.push(newNote)
       }
 
-      AsyncStorage.setItem("Sti_note", JSON.stringify(notes))
+      saveAsyncStore("note", notes)
 
-      return {...state,
+      return {
+        ...state,
         crudModalOpen: false,
         notes
       }
@@ -86,21 +91,30 @@ const reducer = (state: IState = {
       const noteId: string = action.params;
       let idx: number = findIndex(state.notes, (item: INote) => item.id === noteId);
       state.notes.splice(idx, 1)
-      AsyncStorage.setItem("Sti_note", JSON.stringify(state.notes))
-      return {...state,
+      saveAsyncStore("Sti_note", state.notes)
+      return {
+        ...state,
         timestamps: Date.now()
       }
     }
     case constant.ACTION_SAVE_PICTURE: {
-      const base64: string = action.params;
+      const { fileName, base64 } = action.params;
       state.pictures.push({
-        id: uniqueId(`sti_pic_${Date.now()}`),
+        id: fileName,
         base64
       })
 
-      AsyncStorage.setItem("Sti_pictures", JSON.stringify(state.pictures))
+      return { ...state }
+    }
 
-      return {...state}
+    case constant.ACTION_DELETE_PICTURE: {
+      const pictureId: string = action.params;
+      let idx: number = findIndex(state.pictures, (item: IPicture) => item.id === pictureId);
+      state.pictures.splice(idx, 1)
+      return {
+        ...state,
+        timestamps: Date.now()
+      }
     }
   }
 

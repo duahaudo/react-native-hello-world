@@ -1,3 +1,6 @@
+import {saveFile, deleteFile, loadFile, lsDirectory, getAsyncStore} from "./helper"
+import {uniqueId} from "lodash"
+
 const createSimpleAction = (type: string) => (params: any) => (dispatch: any, getState: any) => dispatch({type, params});
 
 export const action = {
@@ -15,6 +18,7 @@ export const action = {
   ACTION_OPEN_NOTE_MODAL: 'ACTION_OPEN_NOTE_MODAL',
   ACTION_CLOSE_NOTE_MODAL: 'ACTION_CLOSE_NOTE_MODAL',
   ACTION_SAVE_PICTURE: 'ACTION_SAVE_PICTURE',
+  ACTION_DELETE_PICTURE: 'ACTION_DELETE_PICTURE',
 
   ACTION_SHOW_LOADING_INDICATOR: 'ACTION_SHOW_LOADING_INDICATOR',
 
@@ -30,13 +34,48 @@ export const moduleName = {
 }
 
 export const setView = createSimpleAction(action.ACTION_SET_VIEW);
-export const initData = createSimpleAction(action.ACTION_INIT_DATA);
 export const setSelectedItem = createSimpleAction(action.ACTION_SET_SELECTED_ITEM);
 export const showLoading = createSimpleAction(action.ACTION_SHOW_LOADING_INDICATOR);
 export const newNote = createSimpleAction(action.ACTION_NEW_NOTE);
 export const deleteNote = createSimpleAction(action.ACTION_DELETE_NOTE);
 export const openNoteModal = createSimpleAction(action.ACTION_OPEN_NOTE_MODAL);
 export const closeNoteModal = createSimpleAction(action.ACTION_CLOSE_NOTE_MODAL);
-export const savePicture = createSimpleAction(action.ACTION_SAVE_PICTURE);
-
 export const setModule = createSimpleAction(action.ACTION_SET_MODULE);
+
+// export const initData = createSimpleAction(action.ACTION_INIT_DATA);
+
+export const initData = () => async (dispatch: any) => {
+  dispatch(showLoading(true))
+  const files: string[] = await lsDirectory()
+  
+  const notes = await getAsyncStore("note")
+  const pictures = await Promise.all(files.map((file: string) => loadFile(file).then((base64: string) => ({
+    id: file,
+    base64
+  }))))
+
+  dispatch({
+    type: action.ACTION_INIT_DATA,
+    params: {pictures, notes}
+  })
+  dispatch(showLoading(false))
+}
+
+export const savePicture = (params: string) => (dispatch: any) => {
+  const fileName = uniqueId(`Sti_files_${Date.now()}`)
+  saveFile(fileName, params).then(() => {
+    dispatch({
+      type: action.ACTION_SAVE_PICTURE,
+      params: {fileName, base64: params}
+    })
+  })
+};
+
+export const deletePicture = (params: string) => (dispatch: any) => {
+  deleteFile(params ).then(() => {
+    dispatch({
+      type: action.ACTION_DELETE_PICTURE,
+      params
+    })
+  }).catch(() => {})
+};

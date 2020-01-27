@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { View, Image, AsyncStorage, ActivityIndicator } from "react-native"
+import { View, Image, TouchableOpacity, FlatList } from "react-native"
 import { useSelector, useDispatch } from 'react-redux'
 import { IStoreState, IPicture } from "../../duck/type"
-import { savePicture, initData, showLoading } from "../../duck/action"
+import { savePicture, initData, deletePicture } from "../../duck/action"
+import { StiTxt } from "../controls/input"
 import style from "./style"
 
-import { StiIconFontAwesome5 } from '../controls/icon';
+import { StiIconFontAwesome5, StiIconMaterialIcon, StiIconEntypo } from '../controls/icon';
 import Camera from "../controls/camera"
 
 interface IProps {
@@ -16,28 +17,22 @@ interface IProps {
 export default () => {
   const dispatch = useDispatch();
   const props: IProps = useSelector(({ reducer }: IStoreState) => {
-    const {pictures, loaded} = reducer;
+    const { pictures, loaded } = reducer;
     return {
       pictures, loaded
     }
   })
 
   const [showCamera, setShowCamera] = useState<boolean>(false);
-  const [selectedPic, setSelectedPic] = useState<string>();
+  const [selectedPic, setSelectedPic] = useState<IPicture>();
+
+  useEffect(() => {
+    dispatch(initData())
+  }, [props.loaded])
 
   const takePictures = () => {
     setShowCamera(true)
   }
-
-  useEffect(() => {
-    if (!props.loaded) {
-      dispatch(showLoading(true))
-      AsyncStorage.getItem("Sti_pictures").then((pictures: string) => {
-        dispatch(initData({pictures: JSON.parse(pictures)}))
-        dispatch(showLoading(false))
-      })
-    }
-  }, [props.loaded])
 
   if (showCamera) {
     return <Camera cameraOffHandler={() => setShowCamera(false)} shutter={(base64: string) => dispatch(savePicture(base64))} />
@@ -46,19 +41,41 @@ export default () => {
   return (
     <View style={style.camera}>
       <View style={style.picturesWrapper}>
-        {props.pictures.map((pic: IPicture, idx: number) => (<View key={pic.id} style={style.pictureBox}>
-          <Image style={style.picture} source={{ uri: `data:image/png;base64,${pic.base64}` }} />
-        </View>))}
+        <FlatList
+          data={props.pictures}
+          renderItem={({ item }) => (<TouchableOpacity style={style.pictureBox} onPress={() => setSelectedPic(item)}>
+            <Image style={style.picture} source={{ uri: `data:image/png;base64,${item.base64}` }} />
+          <StiTxt style={style.pictureName}>{item.id}</StiTxt>
+          </TouchableOpacity>)}
+        />
       </View>
 
-      <View style={style.buttonWrapper}>
+      {selectedPic && (<View style={style.viewPicWrapper}>
+        <View style={style.pictureViewPort}>
+          <Image style={style.pictureLarge} source={{ uri: `data:image/png;base64,${selectedPic.base64}` }} />
+        </View>
+
+        <View style={style.buttonWrapper}>
+          <View style={style.cameraButton}>
+            <StiIconEntypo name="back" size={25} color="white" onPress={() => setSelectedPic(null)} />
+          </View>
+          <View style={style.deleteButton}>
+              <StiIconMaterialIcon name="delete" size={25} color="white" onPress={() => {
+                dispatch(deletePicture(selectedPic.id))
+                setSelectedPic(null)
+              }} />
+            </View>
+          </View>
+      </View>)}
+
+      {!selectedPic && <View style={style.buttonWrapper}>
         <View style={style.cameraButton}>
           <StiIconFontAwesome5 name="camera" size={25} color="white" onPress={() => takePictures()} />
         </View>
         <View style={style.cameraButton}>
           <StiIconFontAwesome5 name="images" size={25} color="white" onPress={() => takePictures()} />
         </View>
-      </View>
+      </View>}
     </View>
   )
 }

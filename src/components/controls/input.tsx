@@ -25,7 +25,7 @@ const style = StyleSheet.create({
     marginTop: 5
   },
   text: {
-    
+    color: "#000"
   },
   inputWrapper: {
     marginBottom: 10
