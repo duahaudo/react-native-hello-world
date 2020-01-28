@@ -1,4 +1,4 @@
-import {saveFile, deleteFile, loadFile, lsDirectory, getAsyncStore} from "./helper"
+import {saveFile, deleteFile, loadFile, lsDirectory, getAsyncStore, saveAsyncStore} from "./helper"
 import {uniqueId} from "lodash"
 
 const createSimpleAction = (type: string) => (params: any) => (dispatch: any, getState: any) => dispatch({type, params});
@@ -48,6 +48,8 @@ export const initData = () => async (dispatch: any) => {
   dispatch(showLoading(true))
   const files: string[] = await lsDirectory()
   
+  // await saveAsyncStore("note", [])
+
   const notes = await getAsyncStore("note")
   const pictures = await Promise.all(files.map((file: string) => loadFile(file).then((base64: string) => ({
     id: file,

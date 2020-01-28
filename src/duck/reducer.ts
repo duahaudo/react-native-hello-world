@@ -79,6 +79,8 @@ const reducer = (state: IState = {
         notes.push(newNote)
       }
 
+      console.log("New Note", JSON.stringify(notes))
+
       saveAsyncStore("note", notes)
 
       return {

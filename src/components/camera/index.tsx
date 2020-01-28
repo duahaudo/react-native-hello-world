@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react"
-import { View, Image, TouchableOpacity, FlatList } from "react-native"
+import React, { useState, useEffect, useCallback } from "react"
+import { View, Image, TouchableOpacity, FlatList, CameraRoll } from "react-native"
 import { useSelector, useDispatch } from 'react-redux'
 import { IStoreState, IPicture } from "../../duck/type"
 import { savePicture, initData, deletePicture } from "../../duck/action"
+import { StiModal } from "../controls/other"
 import { StiTxt } from "../controls/input"
 import style from "./style"
+import * as ImagePicker from 'expo-image-picker';
 
 import { StiIconFontAwesome5, StiIconMaterialIcon, StiIconEntypo } from '../controls/icon';
 import Camera from "../controls/camera"
@@ -26,6 +28,20 @@ export default () => {
   const [showCamera, setShowCamera] = useState<boolean>(false);
   const [selectedPic, setSelectedPic] = useState<IPicture>();
 
+  const getPhotoLibrary = useCallback(async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      base64: true
+      // aspect: [4, 3]
+    });
+    console.log(result)
+    if (!result.cancelled) {
+      return result.base64
+    }
+
+    return null
+  }, [])
+
   useEffect(() => {
     dispatch(initData())
   }, [props.loaded])
@@ -45,7 +61,7 @@ export default () => {
           data={props.pictures}
           renderItem={({ item }) => (<TouchableOpacity style={style.pictureBox} onPress={() => setSelectedPic(item)}>
             <Image style={style.picture} source={{ uri: `data:image/png;base64,${item.base64}` }} />
-          <StiTxt style={style.pictureName}>{item.id}</StiTxt>
+            <StiTxt style={style.pictureName}>{item.id}</StiTxt>
           </TouchableOpacity>)}
         />
       </View>
@@ -60,12 +76,12 @@ export default () => {
             <StiIconEntypo name="back" size={25} color="white" onPress={() => setSelectedPic(null)} />
           </View>
           <View style={style.deleteButton}>
-              <StiIconMaterialIcon name="delete" size={25} color="white" onPress={() => {
-                dispatch(deletePicture(selectedPic.id))
-                setSelectedPic(null)
-              }} />
-            </View>
+            <StiIconMaterialIcon name="delete" size={25} color="white" onPress={() => {
+              dispatch(deletePicture(selectedPic.id))
+              setSelectedPic(null)
+            }} />
           </View>
+        </View>
       </View>)}
 
       {!selectedPic && <View style={style.buttonWrapper}>
@@ -73,9 +89,12 @@ export default () => {
           <StiIconFontAwesome5 name="camera" size={25} color="white" onPress={() => takePictures()} />
         </View>
         <View style={style.cameraButton}>
-          <StiIconFontAwesome5 name="images" size={25} color="white" onPress={() => takePictures()} />
+          <StiIconFontAwesome5 name="image" size={25} color="white" onPress={() => {
+            getPhotoLibrary().then((base64: string) => dispatch(savePicture(base64)))
+          }} />
         </View>
       </View>}
+
     </View>
   )
 }

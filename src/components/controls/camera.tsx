@@ -38,7 +38,7 @@ export default (props: ICamera) => {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={{ flex: 1, backgroundColor: "red" }}>
+    <View style={style.cameraWrapper}>
       <Camera style={{ flex: 1 }} type={type} ref={camearaElement}>
         <View style={style.buttonWrapper}>
           <View style={style.cameraButton}>
@@ -100,5 +100,14 @@ const style = StyleSheet.create({
     borderRadius: 32,
     justifyContent: 'center',
     alignItems: "center"
+  },
+  cameraWrapper: {
+    flex: 1,
+    position: "absolute",
+    top: -60,
+    bottom: -50,
+    right: 0,
+    left: 0,
+    zIndex: 2
   }
 })

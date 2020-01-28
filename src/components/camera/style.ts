@@ -57,9 +57,9 @@ const style = StyleSheet.create({
     backgroundColor: "red"
   },
   viewPicWrapper: {
-    backgroundColor: "lightgrey",
     opacity: 1,
     position: "absolute",
+    backgroundColor: "darkgrey",
     top: 0,
     right: 0,
     left: 0,

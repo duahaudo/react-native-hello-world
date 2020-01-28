@@ -10,7 +10,7 @@ export const removeAsyncStore = (key: string) => {
 }
 
 export const getAsyncStore = (key: string) => {
-  return AsyncStorage.getItem(`Sti_${key}`)
+  return AsyncStorage.getItem(`Sti_${key}`).then(res => JSON.parse(res))
 }
 
 
