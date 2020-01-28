@@ -16,7 +16,6 @@ const reducer = (state: IState = {
   module: moduleName.CAMERA,
   notes: [],
   pictures: [],
-  crudModalOpen: false,
   selectedNote: null,
   loaded: false,
   showLoadingIndicator: false
@@ -30,7 +29,6 @@ const reducer = (state: IState = {
       console.log("Picture", pictures ? pictures.length : 0)
       return {
         ...state,
-        crudModalOpen: false,
         selectedNote: null,
         loaded: true,
         notes: notes ? [...notes] : [],
@@ -59,17 +57,10 @@ const reducer = (state: IState = {
     }
     case constant.ACTION_OPEN_NOTE_MODAL: {
       return {
-        ...state,
-        crudModalOpen: true,
-        selectedNote: action.params || {
-          title: "",
-          timestamp: Date.now(),
-          content: "",
-          id: uniqueId(`sti_note_${Date.now()}`)
-        }
+        ...state
       }
     }
-    case constant.ACTION_CLOSE_NOTE_MODAL: {
+    case constant.ACTION_SAVE_NEW_NOTE: {
       const newNote: INote = action.params;
       let { notes } = state;
       let idx: number = findIndex(notes, (item: INote) => item.id === newNote.id);
@@ -85,7 +76,6 @@ const reducer = (state: IState = {
 
       return {
         ...state,
-        crudModalOpen: false,
         notes
       }
     }

@@ -1,18 +1,18 @@
 import {StyleSheet} from "react-native"
-
-const commonButton = {
-  padding: 10,
-  width: 60,
-  height: 60,
-  alignSelf: "center",
-  borderRadius: 32,
-  justifyContent: 'center',
-  alignItems: "center"
-}
+import {iconBtnStyle} from "../controls/button"
 
 const style = StyleSheet.create({
   camera: {
     flex: 1
+  },
+  cameraModal: {
+    flex: 1,
+    backgroundColor: "red",
+    position: "relative",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0
   },
   picturesWrapper: {
     flex: 1,
@@ -24,13 +24,13 @@ const style = StyleSheet.create({
     marginTop: 5,
     marginLeft: 5,
     marginRight: 5,
-    backgroundColor: "lightblue",
+    // backgroundColor: "lightblue",
     flexDirection: "row",
     opacity: 0.8
   },
   picture: {
-    width: 100,
-    height: 100,
+    width: 40,
+    height: 40,
     padding: 4
   },
   pictureName: {
@@ -49,11 +49,11 @@ const style = StyleSheet.create({
     // backgroundColor: "white"
   },
   cameraButton: {
-    ...commonButton,
+    ...iconBtnStyle,
     backgroundColor: "royalblue"
   },
   deleteButton: {
-    ...commonButton,
+    ...iconBtnStyle,
     backgroundColor: "red"
   },
   viewPicWrapper: {

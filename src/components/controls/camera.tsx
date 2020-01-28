@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { StiIconIon, StiIconMaterialIcon, StiIconFontAwesome5 } from './icon';
+import { iconBtnStyle } from "./button"
 
 // https://docs.expo.io/versions/latest/sdk/camera/
 import { Camera } from 'expo-camera';
@@ -57,57 +58,37 @@ export default (props: ICamera) => {
         </View>
 
         <View style={style.shutter}>
-            <StiIconFontAwesome5 name="camera" size={25} color="white" onPress={() => {
-              props.cameraOffHandler();
-              camearaElement.current.takePictureAsync({
-                quality: 0.5,
-                base64: true,
-                exif: true
-              }).then(({base64}: IPicture) => props.shutter(base64))
-            }} />
-          </View>
+          <StiIconFontAwesome5 name="camera" size={25} color="white" onPress={() => {
+            props.cameraOffHandler();
+            camearaElement.current.takePictureAsync({
+              quality: 0.5,
+              base64: true,
+              exif: true
+            }).then(({ base64 }: IPicture) => props.shutter(base64))
+          }} />
+        </View>
       </Camera>
     </View>
   );
 }
 
+
+
 const style = StyleSheet.create({
   buttonWrapper: {
     flex: 1,
-    backgroundColor: 'transparent',
     flexDirection: "column",
     alignSelf: "flex-start",
     justifyContent: "center"
   },
   cameraButton: {
-    margin: 20,
-    backgroundColor: "royalblue",
-    padding: 10,
-    width: 60,
-    height: 60,
-    alignSelf: "center",
-    borderRadius: 32,
-    justifyContent: 'center',
-    alignItems: "center"
+    ...iconBtnStyle
   },
   shutter: {
-    margin: 20,
-    backgroundColor: "royalblue",
-    padding: 10,
-    width: 60,
-    height: 60,
-    alignSelf: "center",
-    borderRadius: 32,
-    justifyContent: 'center',
-    alignItems: "center"
+    ...iconBtnStyle
   },
   cameraWrapper: {
     flex: 1,
-    position: "absolute",
-    top: -60,
-    bottom: -50,
-    right: 0,
-    left: 0,
-    zIndex: 2
+    backgroundColor: "red"
   }
 })

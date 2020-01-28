@@ -51,11 +51,11 @@ export default () => (
 
 const styles = StyleSheet.create({
   header: {
-    height: 40
+    height: 40,
   },
   body: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#fff',
   },
   opacityHalf: {
     opacity: 0.5

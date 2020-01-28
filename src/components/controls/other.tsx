@@ -19,9 +19,7 @@ export const StiModal = (props: IModal) => {
       Alert.alert('Modal has been closed.');
     }}>
     <View style={style.modal}>
-      <View>
-        {props.children}
-      </View>
+      {props.children}
     </View>
   </Modal>
   )
@@ -29,9 +27,6 @@ export const StiModal = (props: IModal) => {
 
 const style = StyleSheet.create({
   modal: {
-    marginTop: Constants.statusBarHeight,
-    marginBottom: 70,
-    backgroundColor: "#fff",
     flex: 1
   },
   view: {

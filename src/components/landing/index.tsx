@@ -31,7 +31,7 @@ export default () => {
       <ScrollView centerContent={true}>
         <Text style={style.text}>Current time</Text>
         <Text style={style.text}>{time}</Text>
-        <Text style={{flexWrap: "wrap"}}>{files}</Text>
+        {/* <Text style={{flexWrap: "wrap"}}>{files}</Text> */}
       </ScrollView>
     </View>
   )

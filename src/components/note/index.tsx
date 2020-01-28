@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { openNoteModal, closeNoteModal, initData, deleteNote, showLoading } from "../../duck/action"
+import { openNoteModal, saveNewNote, initData, deleteNote, showLoading } from "../../duck/action"
 import style from "./style"
 import { IStoreState, INote } from '../../duck/type';
 import {StiTxt} from "../controls/input"
 import {StiView} from "../controls/other"
 import moment from "moment"
+import {uniqueId} from "lodash"
 
 import NoteCrud from "./crud"
 import { StiIconFontAwesome5 } from '../../components/controls/icon';
@@ -17,6 +18,13 @@ interface IProps {
   note: INote,
   loaded: boolean
 }
+
+const getDefaultNote = (): INote => ({
+  title: "",
+  timestamp: Date.now(),
+  content: "",
+  id: uniqueId(`sti_note_${Date.now()}`)
+})
 
 export default () => {
   const dispatch = useDispatch();
@@ -29,15 +37,27 @@ export default () => {
     }
   })
 
+  const [showCrud, setShowCrud] = useState<boolean>(false)
+  const [currentNote, setCurrentNote] = useState<INote>(getDefaultNote())
+
   useEffect(() => {
     dispatch(initData())
   }, [props.loaded])
 
+  const createUpdateNote = (note: INote) => {
+    setCurrentNote(note ? {...note} : getDefaultNote())
+    setShowCrud(true)
+  }
+
   return (
     <View style={style.container}>
-      <NoteCrud currentNote={props.note} show={props.crudModalOpen} 
-        onClose={(updatedNote: INote) => {
-          dispatch(closeNoteModal(null))
+      <NoteCrud note={currentNote} show={showCrud} 
+        onClose={() => setShowCrud(false)}
+        onSave={(updatedNote: INote) => {
+          if (updatedNote) {
+            dispatch(saveNewNote(updatedNote))
+          }
+          setShowCrud(false)
         }} />
 
       {props.notes.length === 0 && <StiView style={style.center}>
@@ -47,7 +67,7 @@ export default () => {
       {props.notes.length > 0 && <ScrollView style={style.list}>
         {props.notes.map((noteItem: INote, idx: number) => (<TouchableOpacity 
           key={noteItem.id} 
-          onPress={() => dispatch(openNoteModal(noteItem))}>
+          onPress={() => createUpdateNote(noteItem)}>
             <View style={style.listItem}>
               <View style={style.listItem2}>
                 <StiIconFontAwesome5 name="ban" color="red" onPress={() => dispatch(deleteNote(noteItem.id))} />
@@ -58,9 +78,9 @@ export default () => {
         </TouchableOpacity>))}
       </ScrollView>}
 
-      <View style={style.plusBtn}>
-        <StiIconFontAwesome5 name="plus" size={25} color="white" onPress={() => dispatch(openNoteModal(null))} />
-      </View>
+      {!showCrud && <View style={style.plusBtn}>
+        <StiIconFontAwesome5 name="plus" size={25} color="white" onPress={() => createUpdateNote(null)} />
+      </View>}
     </View>
   )
 }

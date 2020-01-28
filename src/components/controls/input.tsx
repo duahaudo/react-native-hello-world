@@ -1,7 +1,7 @@
 import React from "react"
 import {View, TextInput, StyleSheet, Text} from "react-native"
 
-export const StiTxt = (props) => <Text style={{...props.style, ...style.text}}>{props.children}</Text>
+export const StiTxt = (props) => <Text style={{ ...style.text, ...props.style}}>{props.children}</Text>
 
 export const StiInput = ({title, value, onChangeText, ...options}) => (
   <View style={style.inputWrapper}>
@@ -17,17 +17,18 @@ export const StiInput = ({title, value, onChangeText, ...options}) => (
 const style = StyleSheet.create({
   input: { 
     minHeight: 40, 
-    borderColor: 'gray', 
+    borderColor: '#ddd', 
     borderWidth: 1,
-    color: "#000",
+    borderRadius: 3,
+    color: "#696969",
     paddingVertical: 3,
     paddingHorizontal: 10,
-    marginTop: 5
+    marginTop: 8,
   },
   text: {
-    color: "#000"
+    color: "#696969"
   },
   inputWrapper: {
-    marginBottom: 10
+    marginVertical: 10
   }
 })

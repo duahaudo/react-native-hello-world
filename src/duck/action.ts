@@ -16,7 +16,7 @@ export const action = {
   ACTION_NEW_NOTE: 'ACTION_NEW_NOTE',
   ACTION_DELETE_NOTE: 'ACTION_DELETE_NOTE',
   ACTION_OPEN_NOTE_MODAL: 'ACTION_OPEN_NOTE_MODAL',
-  ACTION_CLOSE_NOTE_MODAL: 'ACTION_CLOSE_NOTE_MODAL',
+  ACTION_SAVE_NEW_NOTE: 'ACTION_SAVE_NEW_NOTE',
   ACTION_SAVE_PICTURE: 'ACTION_SAVE_PICTURE',
   ACTION_DELETE_PICTURE: 'ACTION_DELETE_PICTURE',
 
@@ -39,7 +39,7 @@ export const showLoading = createSimpleAction(action.ACTION_SHOW_LOADING_INDICAT
 export const newNote = createSimpleAction(action.ACTION_NEW_NOTE);
 export const deleteNote = createSimpleAction(action.ACTION_DELETE_NOTE);
 export const openNoteModal = createSimpleAction(action.ACTION_OPEN_NOTE_MODAL);
-export const closeNoteModal = createSimpleAction(action.ACTION_CLOSE_NOTE_MODAL);
+export const saveNewNote = createSimpleAction(action.ACTION_SAVE_NEW_NOTE);
 export const setModule = createSimpleAction(action.ACTION_SET_MODULE);
 
 // export const initData = createSimpleAction(action.ACTION_INIT_DATA);

@@ -2,7 +2,6 @@ export interface IState {
   timestamps: number,
   view: string,
   notes: INote[],
-  crudModalOpen: boolean,
   selectedNote: INote,
   loaded: boolean,
   module: string,

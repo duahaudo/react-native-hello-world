@@ -19,8 +19,22 @@ const style = StyleSheet.create({
     backgroundColor: "red"
   },
   modal: {
+    backgroundColor: "#fff",
+    marginTop: Constants.statusBarHeight
+  },
+  modalTitle: {
+    justifyContent: 'center',
+    alignItems: "center",
+    height: 40,
+    backgroundColor: "royalblue"
+  },
+  modalTitleText: {
+    color: "#fff",
+    fontSize: 26
+  },
+  modalBody: {
     padding: 20,
-    paddingTop: 0
+    // backgroundColor: "royalblue"
   },
   button: {
     alignItems: 'center',
@@ -30,8 +44,24 @@ const style = StyleSheet.create({
   list: {
     // backgroundColor: "green"
   },
-  saveBtn: {
-    marginTop: 20
+  closeModalBtn: {
+    // backgroundColor: "blue"
+  },
+  groupBtns: {
+    marginTop: 20,
+    flexDirection: "row",
+    alignContent: "stretch",
+    justifyContent: "space-around"
+  },
+  noPaddingRight: {
+    paddingRight: 0
+  },
+  noPaddingLeft: {
+    paddingLeft: 0
+  },
+  saveBtnItem: {
+    flex: 1,
+    padding: 5
   },
   inputs: {
   },
@@ -50,9 +80,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between"
   },
   title: {
-    paddingLeft: 20,
-    justifyContent: 'center',
-    alignItems: "center"
+    paddingLeft: 20
   },
   plusBtn: {
     backgroundColor: "royalblue",

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react"
-import { View, Image, TouchableOpacity, FlatList, CameraRoll } from "react-native"
+import React, { useState, useEffect, useCallback, useMemo } from "react"
+import { View, Image, TouchableOpacity, FlatList } from "react-native"
 import { useSelector, useDispatch } from 'react-redux'
 import { IStoreState, IPicture } from "../../duck/type"
 import { savePicture, initData, deletePicture } from "../../duck/action"
@@ -7,6 +7,7 @@ import { StiModal } from "../controls/other"
 import { StiTxt } from "../controls/input"
 import style from "./style"
 import * as ImagePicker from 'expo-image-picker';
+import moment from "moment"
 
 import { StiIconFontAwesome5, StiIconMaterialIcon, StiIconEntypo } from '../controls/icon';
 import Camera from "../controls/camera"
@@ -50,18 +51,25 @@ export default () => {
     setShowCamera(true)
   }
 
-  if (showCamera) {
-    return <Camera cameraOffHandler={() => setShowCamera(false)} shutter={(base64: string) => dispatch(savePicture(base64))} />
+  const getTimeStamps = (fileId: string): string => {
+    const timestamps = fileId.replace(/^\D+/g, '')
+    return moment(15801134849521).format("MM-DD-YYYY HH:mm")
   }
 
   return (
     <View style={style.camera}>
+      <StiModal show={showCamera}>
+        <View style={style.cameraModal}>
+          <Camera cameraOffHandler={() => setShowCamera(false)} shutter={(base64: string) => dispatch(savePicture(base64))} />
+        </View>
+      </StiModal>
+
       <View style={style.picturesWrapper}>
         <FlatList
           data={props.pictures}
           renderItem={({ item }) => (<TouchableOpacity style={style.pictureBox} onPress={() => setSelectedPic(item)}>
             <Image style={style.picture} source={{ uri: `data:image/png;base64,${item.base64}` }} />
-            <StiTxt style={style.pictureName}>{item.id}</StiTxt>
+            <StiTxt style={style.pictureName}>{getTimeStamps(item.id)}</StiTxt>
           </TouchableOpacity>)}
         />
       </View>
