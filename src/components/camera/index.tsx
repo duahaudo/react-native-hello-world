@@ -30,14 +30,13 @@ export default () => {
   const [selectedPic, setSelectedPic] = useState<IPicture>();
 
   const getPhotoLibrary = useCallback(async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    let {cancelled, base64} = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       base64: true
       // aspect: [4, 3]
     });
-    console.log(result)
-    if (!result.cancelled) {
-      return result.base64
+    if (cancelled) {
+      return base64
     }
 
     return null
@@ -52,8 +51,8 @@ export default () => {
   }
 
   const getTimeStamps = (fileId: string): string => {
-    const timestamps = fileId.replace(/^\D+/g, '')
-    return moment(15801134849521).format("MM-DD-YYYY HH:mm")
+    const timestamps = Number(fileId.replace(/^\D+/g, ''))
+    return moment(timestamps).format("MM-DD-YYYY HH:mm")
   }
 
   return (
@@ -98,7 +97,11 @@ export default () => {
         </View>
         <View style={style.cameraButton}>
           <StiIconFontAwesome5 name="image" size={25} color="white" onPress={() => {
-            getPhotoLibrary().then((base64: string) => dispatch(savePicture(base64)))
+            getPhotoLibrary().then((base64: string) => {
+              if (base64) {
+                dispatch(savePicture(base64))
+              }
+            })
           }} />
         </View>
       </View>}
