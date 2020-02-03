@@ -13,7 +13,7 @@ const reducer = (state: IState = {
 
   timestamps: Date.now(),
   view: constant.VIEW_NOTE,
-  module: moduleName.CAMERA,
+  module: moduleName.HOME,
   notes: [],
   pictures: [],
   selectedNote: null,

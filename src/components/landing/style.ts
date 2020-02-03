@@ -8,7 +8,9 @@ const style = StyleSheet.create({
     padding: 10,
   },
   text: {
-    marginBottom: 10
+    alignItems: "center",
+    marginBottom: 10,
+    fontSize: 30
   }
 })
 

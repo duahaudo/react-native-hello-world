@@ -52,6 +52,13 @@ const style = StyleSheet.create({
     ...iconBtnStyle,
     backgroundColor: "royalblue"
   },
+  backButton: {
+    ...iconBtnStyle,
+    backgroundColor: "royalblue",
+    transform: [
+      { rotateY: '180deg' }
+    ]
+  },
   deleteButton: {
     ...iconBtnStyle,
     backgroundColor: "red"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react"
-import { View, Image, TouchableOpacity, FlatList } from "react-native"
+import { View, Image, TouchableOpacity, FlatList, Share } from "react-native"
 import { useSelector, useDispatch } from 'react-redux'
 import { IStoreState, IPicture } from "../../duck/type"
 import { savePicture, initData, deletePicture } from "../../duck/action"
@@ -55,6 +55,26 @@ export default () => {
     return moment(timestamps).format("MM-DD-YYYY HH:mm")
   }
 
+  const onSharedHandler = async (base64: string) => {
+    try {
+      const result = await Share.share({
+        message: base64
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <View style={style.camera}>
       <StiModal show={showCamera}>
@@ -79,8 +99,11 @@ export default () => {
         </View>
 
         <View style={style.buttonWrapper}>
+          <View style={style.backButton}>
+            <StiIconFontAwesome5 name="share" size={25} color="white" onPress={() => setSelectedPic(null)} />
+          </View>
           <View style={style.cameraButton}>
-            <StiIconEntypo name="back" size={25} color="white" onPress={() => setSelectedPic(null)} />
+            <StiIconFontAwesome5 name="share-alt" size={25} color="white" onPress={() => onSharedHandler(selectedPic.base64)} />
           </View>
           <View style={style.deleteButton}>
             <StiIconMaterialIcon name="delete" size={25} color="white" onPress={() => {

@@ -29,9 +29,7 @@ export default () => {
   return (
     <View style={style.landing}>
       <ScrollView centerContent={true}>
-        <Text style={style.text}>Current time</Text>
         <Text style={style.text}>{time}</Text>
-        {/* <Text style={{flexWrap: "wrap"}}>{files}</Text> */}
       </ScrollView>
     </View>
   )
