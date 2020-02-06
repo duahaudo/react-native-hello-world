@@ -2,8 +2,9 @@
   "name": "helloWorld",
   "displayName": "Hello World",
   "expo": {
-    "name": "Stiger App",
-    "slug": "expo-template-bare",
+    "name": "Hello World",
+    "icon": "./s-logo.png",
+    "slug": "hello.world",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "version": "1.0.0",
@@ -13,6 +14,15 @@
       "android",
       "web"
     ],
-    "description": ""
+    "description": "",
+    "ios": {
+      "bundleIdentifier": "app.stiger.me",
+      "buildNumber": "1.0.0"
+    },
+    "splash": {
+      "image": "./s-logo.png",
+      "resizeMode": "center",
+      "backgroundColor": "#ffffff"
+    }
   }
 }
