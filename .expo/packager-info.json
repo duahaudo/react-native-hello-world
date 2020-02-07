@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 60012,
-  "expoServerNgrokUrl": "https://2c-bef.duahaudo.helloworld.exp.direct",
-  "packagerNgrokUrl": "https://packager.2c-bef.duahaudo.helloworld.exp.direct",
-  "ngrokPid": 60190
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

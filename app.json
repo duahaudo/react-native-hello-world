@@ -3,8 +3,7 @@
   "displayName": "Hello World",
   "expo": {
     "name": "Hello World",
-    "icon": "./s-logo.png",
-    "slug": "hello.world",
+    "slug": "hello-world",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "version": "1.0.0",
@@ -21,7 +20,7 @@
     },
     "splash": {
       "image": "./s-logo.png",
-      "resizeMode": "center",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     }
   }
